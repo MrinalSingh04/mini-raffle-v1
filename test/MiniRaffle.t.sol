@@ -52,9 +52,8 @@ contract MiniRaffleTest is Test {
         assertEq(address(raffle).balance, 0);
 
         // One of them must have received the prize
-        bool someoneWon = player1.balance == bal1 + prize ||
-            player2.balance == bal2 + prize ||
-            player3.balance == bal3 + prize;
+        bool someoneWon =
+            player1.balance == bal1 + prize || player2.balance == bal2 + prize || player3.balance == bal3 + prize;
 
         assertTrue(someoneWon);
 

@@ -15,21 +15,13 @@ contract MiniRaffle {
         require(players.length > 0, "No players");
 
         // Pseudo-random (unsafe for mainnet, fine for learning)
-        uint256 random = uint256(
-            keccak256(
-                abi.encodePacked(
-                    block.timestamp,
-                    block.prevrandao,
-                    players.length
-                )
-            )
-        );
+        uint256 random = uint256(keccak256(abi.encodePacked(block.timestamp, block.prevrandao, players.length)));
 
         uint256 winnerIndex = random % players.length;
         address payable winner = players[winnerIndex];
 
         // Send all ETH to winner
-        (bool success, ) = winner.call{value: address(this).balance}("");
+        (bool success,) = winner.call{value: address(this).balance}("");
         require(success, "Transfer failed");
 
         // Reset players
